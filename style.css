@@ -1,0 +1,284 @@
+
+:root{
+  --c-sky: #7ED9E8;        /* سماوي */
+  --c-peach: #FFA552;      /* برتقالي فاتح */
+  --c-deep: #173F4F;       /* لون داكن للنصوص */
+  --c-card: rgba(255,255,255,0.92);
+  --glass: rgba(255,255,255,0.12);
+  --muted: #6b6b6b;
+  --radius-xl: 18px;
+  --radius-md: 12px;
+  --gap: 16px;
+  --transition: 220ms ease;
+  --input-h: 40px;
+  --shadow-soft: 0 8px 30px rgba(23,63,79,0.08);
+}
+
+/* ---------- قاعدة عامة ---------- */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Inter", "Segoe UI", Tahoma, system-ui, Arial, sans-serif;
+  color:var(--c-deep);
+  background: linear-gradient(135deg, rgba(126,217,232,0.12) 0%, rgba(255,165,82,0.08) 50%, rgba(126,217,232,0.06) 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.55;
+  padding-bottom:40px;
+}
+
+/* ---------- الحاوية المركزية ---------- */
+.container{
+  max-width:1100px;
+  margin:28px auto;
+  padding:22px;
+}
+
+/* ---------- الهيدر / شريط التنقّل (مختلف ومميز) ---------- */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--gap);
+  padding:18px 22px;
+  border-radius: calc(var(--radius-xl));
+  background: linear-gradient(90deg, rgba(126,217,232,0.18), rgba(255,165,82,0.12));
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px) saturate(1.05);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.header .brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.brand .logo{
+  width:54px;
+  height:54px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--c-sky), var(--c-peach));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.brand h1{
+  margin:0;
+  font-size:18px;
+  color:var(--c-deep);
+  letter-spacing:0.2px;
+}
+.header nav{ display:flex; gap:10px; align-items:center; }
+
+/* روابط التنقّل */
+.header nav a{
+  padding:8px 12px;
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--c-deep);
+  font-weight:600;
+  transition: transform var(--transition), background var(--transition), color var(--transition);
+  background: transparent;
+  border: 1px solid rgba(23,63,79,0.04);
+}
+.header nav a:hover{
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, rgba(126,217,232,0.16), rgba(255,165,82,0.12));
+  color: #062930;
+  box-shadow: 0 10px 30px rgba(14,46,52,0.06);
+}
+
+/* زر بارز لإضافة تطبيق (مختلف اللون) */
+.btn-primary{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:12px;
+  background: linear-gradient(90deg, var(--c-peach), var(--c-sky));
+  color: #fff;
+  font-weight:700;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  box-shadow: 0 8px 22px rgba(126,217,232,0.12);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 12px 30px rgba(126,217,232,0.18); }
+
+/* زر ثانوي */
+.btn-ghost{
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px dashed rgba(23,63,79,0.06);
+  background:transparent;
+  color:var(--c-deep);
+  cursor:pointer;
+}
+
+/* ---------- بطاقات المحتوى الأساسية ---------- */
+.card{
+  background: var(--c-card);
+  border-radius: var(--radius-md);
+  padding:18px;
+  box-shadow: 0 12px 30px rgba(12,34,40,0.04);
+  border: 1px solid rgba(10,30,36,0.03);
+  margin-bottom:18px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(12,34,40,0.06); }
+
+/* عناوين داخل الكارد */
+.card h3{
+  margin:0 0 8px 0;
+  font-size:18px;
+  color:var(--c-deep);
+}
+
+/* ---------- شبكة بسيطة للصفحة الرئيسية / المحتوى ---------- */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:18px;
+  align-items:start;
+}
+@media (max-width:980px){
+  .grid{ grid-template-columns:1fr; }
+}
+
+/* ---------- نمط الحقول والنماذج ---------- */
+.form-row{ margin-bottom:12px; }
+label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-weight:600;
+  font-size:13px;
+}
+input[type="text"], input[type="url"], select, textarea, input[type="file"]{
+  width:100%;
+  min-height:var(--input-h);
+  padding:9px 12px;
+  border-radius:10px;
+  border:1px solid rgba(23,63,79,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,248,249,0.95));
+  font-size:14px;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color: rgba(126,217,232,0.7);
+  box-shadow: 0 8px 20px rgba(126,217,232,0.12);
+}
+textarea{ min-height:120px; resize:vertical; padding-top:10px; }
+
+/* أزرار النماذج */
+.form-actions{ display:flex; gap:12px; align-items:center; margin-top:8px; }
+.btn-submit{
+  background: linear-gradient(90deg, var(--c-peach), #ffb77a);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  transition: transform var(--transition), filter var(--transition);
+}
+.btn-submit:hover{ transform:translateY(-3px); filter:brightness(1.02); }
+.btn-reset{
+  background:transparent;
+  border:1px solid rgba(23,63,79,0.06);
+  padding:9px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* ---------- جدول التطبيقات (مظهر جديد) ---------- */
+.table-wrap{ overflow:auto; border-radius:12px; }
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:700px;
+}
+th, td{
+  padding:12px 14px;
+  text-align:left;
+  vertical-align:middle;
+  font-size:14px;
+}
+thead th{
+  background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.45));
+  position: sticky;
+  top:0;
+  z-index:2;
+  font-weight:700;
+  color:var(--muted);
+  border-bottom:1px solid rgba(12,34,40,0.04);
+}
+tbody tr{
+  transition: background var(--transition), transform var(--transition);
+}
+tbody tr:hover{ background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.55)); transform: translateY(-2px); }
+
+/* زر التفاصيل صغير وأنيق */
+.show-details{
+  padding:8px 10px;
+  border-radius:8px;
+  border:none;
+  background: linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9));
+  cursor:pointer;
+}
+
+/* ---------- كروت التفاصيل المدمجة ---------- */
+.details{
+  margin-top:10px;
+  padding:12px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,250,0.95));
+  border:1px solid rgba(23,63,79,0.03);
+  box-shadow: 0 8px 18px rgba(12,34,40,0.03);
+}
+.details img{ max-width:220px; border-radius:8px; display:block; margin-top:8px; }
+.details audio, .details video{ display:block; margin-top:8px; max-width:360px; }
+
+/* ---------- لافتات صغيرة أو علامات ---------- */
+.badge{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+  color:#062930;
+  background: linear-gradient(90deg, rgba(126,217,232,0.25), rgba(255,165,82,0.18));
+}
+
+/* ---------- فوتر خفيف ---------- */
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  opacity:0.9;
+}
+
+/* ---------- أنيميشن تحميل لطيف (خفيف جداً) ---------- */
+@keyframes floatIn {
+  from { opacity:0; transform: translateY(8px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.card, .header, .table-wrap{ animation: floatIn 360ms cubic-bezier(.2,.9,.3,1) both; }
+
+/* ---------- استجابة للموبايل ---------- */
+@media (max-width:700px){
+  .header{ flex-direction:column; gap:12px; align-items:flex-start; padding:14px; }
+  .brand h1{ font-size:16px; }
+  .grid{ display:block; }
+  table{ min-width:100%; }
+  .brand .logo{ width:48px; height:48px; }
+}
+
+/* ---------- تحسينات صغيرة للقراءة ---------- */
+small { color:var(--muted); font-size:12px; display:block; margin-top:6px; }
+
+/* ---------- نهاية الملف ---------- */
