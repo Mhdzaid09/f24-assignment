@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>إضافة تطبيق جديد</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/myFunctions.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="logo">AI</div>
+      <h1>إضافة تطبيق</h1>
+    </div>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="aboutus.html">من نحن</a>
+      <a href="apps.html">التطبيقات</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="appForm">
+        <div class="form-row">
+          <label>اسم التطبيق (إنجليزي فقط بدون فراغ)</label>
+          <input id="name" type="text" placeholder="MyApp">
+        </div>
+
+        <div class="form-row">
+          <label>اسم الشركة (إنجليزي فقط بدون فراغ)</label>
+          <input id="manufacturer" type="text" placeholder="CompanyName">
+        </div>
+
+        <div class="form-row">
+          <label>رابط الموقع</label>
+          <input id="website" type="url" placeholder="https://example.com">
+        </div>
+
+        <div class="form-row">
+          <label>هل مجاني؟</label>
+          <label><input type="radio" name="isFree" value="true" checked> مجاني</label>
+          <label><input type="radio" name="isFree" value="false"> غير مجاني</label>
+        </div>
+
+        <div class="form-row">
+          <label>مجال الاستخدام</label>
+          <select id="category">
+            <option value="">-- اختر --</option>
+            <option>Education</option>
+            <option>E-Commerce</option>
+            <option>Robotics</option>
+            <option>Health</option>
+            <option>Finance</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>شرح مختصر</label>
+          <textarea id="description"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label>شعار (صورة)</label>
+          <input id="logo" type="file" accept="image/*">
+        </div>
+
+        <div class="form-row">
+          <label>ملف صوتي</label>
+          <input id="audio" type="file" accept="audio/*">
+        </div>
+
+        <div class="form-row">
+          <label>فيديو صغير</label>
+          <input id="video" type="file" accept="video/*">
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-submit" type="submit">إرسال</button>
+          <button class="btn-reset" type="reset">إعادة</button>
+        </div>
+        <div id="errors" style="color:red;margin-top:10px"></div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    $(function(){
+      $('#appForm').on('submit', async function(e){
+        e.preventDefault();
+        $('#errors').text('');
+
+        const name = $('#name').val().trim();
+        const manufacturer = $('#manufacturer').val().trim();
+        const website = $('#website').val().trim();
+        const isFree = $('input[name="isFree"]:checked').val() === 'true';
+        const category = $('#category').val();
+        const description = $('#description').val().trim();
+
+        const logoFile = $('#logo')[0].files[0];
+        const audioFile = $('#audio')[0].files[0];
+        const videoFile = $('#video')[0].files[0];
+
+        const logo = await readFileAsDataURL(logoFile);
+        const audio = await readFileAsDataURL(audioFile);
+        const video = await readFileAsDataURL(videoFile);
+
+        const data = { name, manufacturer, website, isFree, category, description, logo, audio, video };
+        const errors = validateAppData(data);
+        if (errors.length) {
+          $('#errors').html(errors.map(e => `- ${e}<br>`).join(''));
+          return;
+        }
+
+        addAppObject(data);
+        window.location.href = 'apps.html';
+      });
+    });
+  </script>
+
+  <footer class="footer">
+    &copy; 2025 مجموعة الذكاء الاصطناعي.
+  </footer>
+</body>
+</html>

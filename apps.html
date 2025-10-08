@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>قائمة التطبيقات</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/myFunctions.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="logo">AI</div>
+      <h1>قائمة التطبيقات</h1>
+    </div>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="aboutus.html">من نحن</a>
+      <a href="add_app.html">إضافة تطبيق</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h3>التطبيقات المضافة</h3>
+      <div class="table-wrap">
+        <table id="appsTable">
+          <thead>
+            <tr>
+              <th>تفاصيل</th>
+              <th>الاسم</th>
+              <th>الشركة</th>
+              <th>مجاني؟</th>
+              <th>المجال</th>
+              <th>الموقع</th>
+            </tr>
+          </thead>
+          <tbody id="appsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    $(function(){
+      seedExampleApps();
+      renderAppsTable($('#appsBody'));
+    });
+  </script>
+
+  <footer class="footer">
+    &copy; 2025 مجموعة الذكاء الاصطناعي.
+  </footer>
+</body>
+</html>
